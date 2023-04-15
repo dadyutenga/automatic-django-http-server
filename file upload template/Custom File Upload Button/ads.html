@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Upload</title>
+</head>
+<body>
+  <input type="file" id="file-input" multiple>
+  <ul id="files-list"></ul>
+  <p id="num-of-files"></p>
+  <button id="save-files">Save Files to FTP</button>
+  <button id="download-files">Download Files</button>
+
+  <script>
+    let fileInput = document.getElementById("file-input");
+    let fileList = document.getElementById("files-list");
+    let numOfFiles = document.getElementById("num-of-files");
+    let saveFilesBtn = document.getElementById("save-files");
+    let downloadFilesBtn = document.getElementById("download-files");
+
+    fileInput.addEventListener("change", () => {
+      fileList.innerHTML = "";
+      numOfFiles.textContent = `${fileInput.files.length} Files Selected`;
+
+      for (let i of fileInput.files) {
+        let listItem = document.createElement("li");
+        let fileName = i.name;
+        let fileSize = (i.size / 1024).toFixed(1);
+        listItem.innerHTML = `<p>${fileName}</p><p>${fileSize}KB</p>`;
+        if (fileSize >= 1024) {
+          fileSize = (fileSize / 1024).toFixed(1);
+          listItem.innerHTML = `<p>${fileName}</p><p>${fileSize}MB</p>`;
+        }
+        fileList.appendChild(listItem);
+      }
+    });
+
+    saveFilesBtn.addEventListener("click", () => {
+      // Perform FTP function to save files to a folder
+      // Replace the FTP function with your own implementation
+      // Example: ftpSaveFiles(fileInput.files);
+      alert("Files saved to FTP successfully!");
+    });
+
+    downloadFilesBtn.addEventListener("click", () => {
+      // Perform download functionality
+      // Replace with your own implementation
+      // Example: downloadFiles(fileInput.files);
+      alert("Files downloaded successfully!");
+    });
+  </script>
+</body>
+</html>
